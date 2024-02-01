@@ -1,5 +1,5 @@
-def get_average():
-    with open("Files/temperature.txt", 'r') as file:
+def get_average(file_name):
+    with open(file_name, 'r') as file:
         temp = file.readlines()
 
     temp = temp[1:]
@@ -8,5 +8,6 @@ def get_average():
     return average_local
 
 
-average = get_average()
+filename = "Files/temperature.txt"
+average = get_average(filename)
 print("Average is ", average)

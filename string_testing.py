@@ -1,3 +1,4 @@
+"""
 string = '''Have a good Day'''
 print(type(string))
 
@@ -5,7 +6,7 @@ print(type(string))
 print(string[-1])
 print(string[14])
 print("Print the last word: ", string[12:])
-"""
+
 # Finding index
 print(string.index('Day'))
 
@@ -57,7 +58,7 @@ print("You chose ", mylist[number])
 kg = float(input("Enter the number to convert:"))
 lbs = kg * 2.2
 print("LBS: ", lbs)
-"""
+
 
 # List Comprehension
 
@@ -91,3 +92,17 @@ user_entries = ['10', '19.1', '20']
 
 user_entries = sum([float(number) for number in user_entries])
 print("User Entry : ", user_entries)
+
+
+
+def func(a):
+    if a < 2:
+        return a
+    print(a + func(a - 1))
+    return a + func(a - 1)
+
+
+print(func(4))
+"""
+
+print(36 << 3)

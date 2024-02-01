@@ -1,13 +1,10 @@
 from pathlib import Path
+from Modules import user_inputs
 
+#from user_inputs import get_input, write_todos
+
+# print(help(write_todos)) # Use of doc-strings
 todos = []
-
-
-def get_input():
-    with open(my_file, 'r') as file:
-        todos = file.readlines()
-    return todos
-
 
 while True:
     user_action = input("Enter the value Add or Edit or Drop or Show/Display or Exit:")
@@ -20,19 +17,17 @@ while True:
         print("Todo is :", todo)
 
         if my_file.is_file():
-            todos = get_input()
+            todos = user_inputs.get_input(my_file)
 
             todos.append(todo)
             print(todos)
 
-            with open(my_file, 'w') as file:
-                file.writelines(todos)
+            user_inputs.write_todos(todos, my_file)
         else:
             todos.append(todo)
-            with open(my_file, 'w') as file:  # This is called context-manager
-                file.writelines(todos)
+            user_inputs.write_todos(todos)
     elif user_action.startswith("show"):
-        todos = get_input()
+        todos = user_inputs.get_input(my_file)
 
         """
         # list comprehensions
@@ -45,7 +40,7 @@ while True:
             print(f"{index + 1}-{item}")
     elif user_action.startswith("edit"):
         try:
-            todos = get_input()
+            todos = user_inputs.get_input(my_file)
 
             number = int(user_action[5:])
             number = int(number) - 1
@@ -54,8 +49,7 @@ while True:
             new_val = input("Enter the new value:")
             todos[number] = new_val + "\n"
 
-            with open(my_file, 'w') as file:
-                file.writelines(todos)
+            user_inputs.write_todos(todos, my_file)
         except ValueError:
             print("Wrong input. Enter the correct input.")
             continue
@@ -64,15 +58,14 @@ while True:
             continue
     elif user_action.startswith("drop"):
         try:
-            todos = get_input()
+            todos = user_inputs.get_input(my_file)
 
             number = int(user_action[5:])
             number -= 1
             print("Item to be dropped is : ", todos[number].strip('\n'))
             todos.pop(number)
 
-            with open(my_file, 'w') as file:
-                file.writelines(todos)
+            user_inputs.write_todos(todos, my_file)
         except IndexError:
             print("The provided index is not available in existing List.")
             print(f"Total items in the file is {len(todos)}")
@@ -82,5 +75,5 @@ while True:
     else:
         print("Wrong Input Actions. Enter the correct input option again\n")
 
-print("User is", user_action)
+print("User action is", user_action)
 print("Program Complete")

@@ -1,33 +1,32 @@
 password = input("Enter the password:")
 
-result = {}
 
-if len(password) >= 8:
-    result["length"] = True
-else:
-    result["length"] = False
+def strength(password):
+    result = {}
 
-flag = False
+    if len(password) > 8:
+        result['lenth'] = True
+    else:
+        result['lenth'] = False
 
-for char in password:
-    if char.isdigit():
-        flag = True
+    upper = False
+    for character in password:
+        if character.isupper():
+            result['upper'] = True
 
-result["digit"] = flag
+    for character in password:
+        if character.isdigit():
+            result['digit'] = True
+        else:
+            result['digit'] = False
 
-upperC = False
-for upp in password:
-    if upp.isupper():
-        upperC = True
+    print(result)
 
-result["upper"] = upperC
-# Another way instead of using Dictionary
-# result = []
-# #result.append(upperC)
+    if all(result.values()):
+        return "Strong Password"
+    else:
+        return "Weak Password"
 
-print(result)
 
-if all(result.values()):
-    print("Strong Password")
-else:
-    print("Weak Password.", result.values())
+message = strength(password)
+print(message)
